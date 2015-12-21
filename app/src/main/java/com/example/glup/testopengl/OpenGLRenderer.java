@@ -3,6 +3,9 @@ package com.example.glup.testopengl;
 import android.opengl.GLSurfaceView.Renderer;
 import android.opengl.GLU;
 
+import com.example.glup.testopengl.mesh.Cube;
+import com.example.glup.testopengl.mesh.Group;
+
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
@@ -12,8 +15,16 @@ import javax.microedition.khronos.opengles.GL10;
 public class OpenGLRenderer implements Renderer{
     private Square square;
     private float angle;
+    private Cube cube;
+    private Group root;
     public OpenGLRenderer(){
-        square=new Square();
+        //square=new Square();
+        Group group = new Group();
+        cube= new Cube(1,1,1);
+        cube.rx=45;
+        cube.ry=45;
+        group.add(cube);
+        root = group;
     }
     @Override
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
@@ -46,7 +57,18 @@ public class OpenGLRenderer implements Renderer{
         //reset the modelview matrix
         gl.glLoadIdentity();
     }
-
+    @Override
+    public void onDrawFrame(GL10 gl){
+        // Clears the screen and depth buffer.
+        gl.glClear(GL10.GL_COLOR_BUFFER_BIT | GL10.GL_DEPTH_BUFFER_BIT);
+        // Replace the current matrix with the identity matrix
+        gl.glLoadIdentity();
+        // Translates 4 units into the screen.
+        gl.glTranslatef(0, 0, -4);
+        // Draw our scene.
+        root.draw(gl);
+    }
+    /*
     @Override
     public void onDrawFrame(GL10 gl) {
 // Clears the screen and depth buffer.
@@ -98,5 +120,5 @@ public class OpenGLRenderer implements Renderer{
 
         // Increse the angle.
         angle++;
-    }
+    }*/
 }
