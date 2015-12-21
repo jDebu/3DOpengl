@@ -3,6 +3,7 @@ package com.example.glup.testopengl;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.pm.ConfigurationInfo;
+import android.graphics.BitmapFactory;
 import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -17,6 +18,8 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 
+import com.example.glup.testopengl.mesh.SimplePlane;
+
 public class MainActivity extends AppCompatActivity {
     private TextView version;
     @Override
@@ -25,8 +28,18 @@ public class MainActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         GLSurfaceView view = new GLSurfaceView(this);
-        view.setRenderer(new OpenGLRenderer());
+        OpenGLRenderer renderer = new OpenGLRenderer();
+        view.setRenderer(renderer);
         setContentView(view);
+        //create a  new plane
+        SimplePlane simplePlane=new SimplePlane(1,1);
+        //mover y rotar el plano
+        simplePlane.z=1.7f;
+        simplePlane.rx=-65;
+        //cargar la textura
+        simplePlane.loadBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.jay));
+        //add the plane to the renderer
+        renderer.addMesh(simplePlane);
         /*version=(TextView)findViewById(R.id.txt_version_opengl);
 
         if (hasGLES20()){

@@ -5,6 +5,7 @@ import android.opengl.GLU;
 
 import com.example.glup.testopengl.mesh.Cube;
 import com.example.glup.testopengl.mesh.Group;
+import com.example.glup.testopengl.mesh.Mesh;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
@@ -20,10 +21,10 @@ public class OpenGLRenderer implements Renderer{
     public OpenGLRenderer(){
         //square=new Square();
         Group group = new Group();
-        cube= new Cube(1,1,1);
+        /*cube= new Cube(1,1,1);
         cube.rx=45;
         cube.ry=45;
-        group.add(cube);
+        group.add(cube);*/
         root = group;
     }
     @Override
@@ -51,7 +52,7 @@ public class OpenGLRenderer implements Renderer{
         //reset the projection matrix
         gl.glLoadIdentity();
         //calculate the aspect ratio of the window
-        GLU.gluPerspective(gl, 45.0f, (float) width / (float) height, 0.1f, 100.0f);
+        GLU.gluPerspective(gl, 45.0f, (float) width / (float) height, 0.1f, 1000.0f);
         //select the modelview matrix
         gl.glMatrixMode(GL10.GL_MODELVIEW);
         //reset the modelview matrix
@@ -67,6 +68,9 @@ public class OpenGLRenderer implements Renderer{
         gl.glTranslatef(0, 0, -4);
         // Draw our scene.
         root.draw(gl);
+    }
+    public void addMesh(Mesh mesh) {
+        root.add(mesh);
     }
     /*
     @Override

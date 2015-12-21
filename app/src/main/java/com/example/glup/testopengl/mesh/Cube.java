@@ -6,9 +6,9 @@ package com.example.glup.testopengl.mesh;
  */
 public class Cube extends Mesh {
     public Cube(float width, float height, float depth) {
-        width  /= 4;
-        height /= 4;
-        depth  /= 4;
+        width  /= 2;
+        height /= 2;
+        depth  /= 2;
 
         float vertices[] = { -width, -height, -depth, // 0
                 width, -height, -depth, // 1
