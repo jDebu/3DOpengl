@@ -44,6 +44,8 @@ public class Square {
         indexBuffer.position(0);
     }
     public void draw(GL10 gl){
+        //color background
+        gl.glColor4f(0.5f, 0.5f, 1.0f, 1.0f);
         //Counter-clokwise winding
         gl.glFrontFace(GL10.GL_CCW);
         //Enable face culling
